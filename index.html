@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-rows: 1fr 2fr;
+            background-color: black;
+            row-gap:4px;
+            width: 100vw;
+            height:100vh;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        .output{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: repeat(4,auto);
+            
+            gap:4px 4px;
+        }
+        .button{
+            display:grid;
+            grid-template-columns:repeat(3,auto);
+            grid-template-rows:repeat(4,auto);
+            gap:4px 4px;
+        }
+        .keys{
+            background-color: antiquewhite;
+        }
+        .screen{
+            background-color: aliceblue;
+        }
+        
+       
+
+    </style>
+</head>
+<body>
+ <div class="container">
+    <div class="output">
+        <div class="screen">DEC</div>
+        <div class="screen d">0</div>
+        <div class="screen">BIN</div>
+        <div class="screen b">0</div>
+        <div class="screen">OCT</div>
+        <div class="screen o">0</div>
+        <div class="screen">HEX</div>
+        <div class="screen h">0</div>
+    </div>
+    <div class="button">
+        <div class="keys" onclick = "func2('7')">7</div>
+        <div class="keys" onclick = "func2('8')">8</div>
+        <div class="keys" onclick = "func2('9')">9</div>
+        <div class="keys" onclick = "func2('4')">4</div>
+        <div class="keys" onclick = "func2('5')">5</div>
+        <div class="keys" onclick = "func2('6')">6</div>
+        <div class="keys" onclick = "func2('1')">1</div>
+        <div class="keys" onclick = "func2('2')">2</div>
+        <div class="keys" onclick = "func2('3')">3</div>
+        <div class="keys" onclick = "func2('0')">0</div>
+        <div class="keys" onclick = "func2('c')">C</div>
+        <div class="keys" onclick = "func2('=')">=</div>
+    </div>
+ </div>    
+</body>
+<script>
+    const d = document.querySelector('.d');
+    const b = document.querySelector('.b');
+    const o = document.querySelector('.o');
+    const h = document.querySelector('.h');
+    let num = "";
+    function reverse(str){
+        let res ="";
+        let n = str.length;
+        for(let i =n-1;i>=0;i--) res+=str[i];
+        return res;
+    }
+    function bin(n){
+       let res = "";
+       if(n==0) return '0';
+       while (n!=0)
+       {
+        res+=n%2;
+        n = Math.floor(n/2);
+       }
+       return reverse(res);
+    }
+    function oct(n){
+        let res = "";
+        if(n==0) return '0';
+       while (n!=0)
+       {
+        res+=n%8;
+        n = Math.floor(n/8);
+       }
+       return reverse(res);
+    }
+    function hex(n){
+        let res = "";
+        if(n==0) return '0';
+        while(n!=0)
+        {
+            let d = n%16;
+            switch(d)
+            {
+                case 10:
+                res+='A';
+                break;
+                case 11:
+                res+='B';
+                break;
+                case 12:
+                res+='C';
+                breakl
+                case 13:
+                res+='D';
+                break;
+                case 14:
+                res+='E';
+                break;
+                case 15:
+                res+='F';
+                break;
+                default:
+                res+=d;
+            }
+            n= Math.floor(n/16);
+        }
+        return reverse(res);
+    }
+    function func2(x){
+      if(x!='c'&&x!='=')
+      {
+        if(num=='0') num = "";
+        num+=x;
+      }
+      else if(x=='c') num = '0';
+      d.innerHTML = num;
+      b.innerHTML = bin(parseInt(num));
+      o.innerHTML = oct(parseInt(num));
+      h.innerHTML = hex(parseInt(num));
+
+    }
+  
+</script>
+</html>
